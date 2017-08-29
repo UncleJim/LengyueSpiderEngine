@@ -53,6 +53,14 @@
                         </div>
 
                         <div class="am-form-group">
+                            <label class="am-u-sm-3 am-form-label">父组<span class="tpl-form-line-small-title">Father</span></label>
+                            <div class="am-u-sm-9">
+                                <input type="text" placeholder="请输入父组" id="father" >
+                            </div>
+                        </div>
+
+
+                        <div class="am-form-group">
                             <label for="user-weibo" class="am-u-sm-3 am-form-label">用户组<span class="tpl-form-line-small-title">Group</span></label>
                             <div class="am-u-sm-9">
                                 <input type="text" placeholder="用户组" id="group">
@@ -83,7 +91,7 @@
 <script>
     $('#reg').click(function() {
             $('#reg').active = false
-            $.getJSON('../mapi/group/add?description=' + $('#description').val() + '&name=' + $('#name').val() + '&group=' + $('#group').val() + '&group=' + $('#group').val() + '&url=' + $('#url').val() + '&css=' + $('#css').val() + '&show=' + $('#show').val(),function(data){
+            $.getJSON('../mapi/group/add?father=' + $('#father').val() + '&description=' + $('#description').val() + '&name=' + $('#name').val() + '&group=' + $('#group').val() + '&group=' + $('#group').val() + '&url=' + $('#url').val() + '&css=' + $('#css').val() + '&show=' + $('#show').val(),function(data){
                 alert(data['msg'])
                 if (data['state'] == 200){
                     window.location.href='?page=menu'

@@ -163,10 +163,6 @@ API区块
 #登录
 @app.route('/mapi/<username>/login')
 def mapi_login(username):
-    ckr = check_login(request.cookies.get('token'))
-    if ckr == False:
-        ret = {'state': 400, 'msg': 'No Auth'}
-        return json.dumps(ret)
     try:
         dbret = Main_dbc.get_one('users',{'username':username,'password':request.args.get('password')})
         Main_logger.info('DB return -> ' + str(dbret))
@@ -245,10 +241,10 @@ def mapi_group_create():
                 "css": request.args.get('css'),
                 "show": int(request.args.get('show')),
                 "description":request.args.get('description'),
-                "father":""
+                "father":request.args.get('father')
             }
             dbret = Main_dbc.insert_one('pages', info)
-            ret = {'state':200,'msg':'注冊成功'}
+            ret = {'state':200,'msg':'新建成功'}
     except:
         ret = {'state':500,'msg':'服务器错误'}
     return json.dumps(ret)
@@ -297,7 +293,7 @@ def mapi_menu_update():
                 "css": request.args.get('css'),
                 "show": int(request.args.get('show')),
                 "description":request.args.get('description'),
-                "father":""
+                "father":request.args.get('father')
             })
             ret = {'state':200,'msg':'提交成功'}
         else:
@@ -355,11 +351,11 @@ def mapi_menu_remove(url):
 def api_plugin(plugname):
     ckr = check_login(request.cookies.get('token'))
     if ckr == False:
-        ret = {'state': 400, 'msg': 'No Auth'}
-        return json.dumps(ret)
-
+        ckr = {'_id':'noAuth','username':'spider'}
+    else:
+        ckr['_id'] = str(ckr['_id'])
     if plugname in Main_plugins_list:
-        args = {'requests':request.args,'user':ckr,'cookies':request.cookies}
+        args = {'requests':request.args,'user':ckr,'cookies':request.cookies,'posts':request.form}
         return Main_plugins.exec(plugname, request.args.get('method'), args , api=1)
     else:
         info = {'state':'400','msg':'Plugin not existed'}
@@ -380,4 +376,4 @@ if __name__ == '__main__':
     Main_dbc.setUnique('plugins', 'model')
     Main_plugins = class_plugins.plugins(Main_dbc)
     Main_plugins_list = Main_plugins.getlist()
-    app.run(host='0.0.0.0', port=6677)
+    app.run(host='0.0.0.0', port=6677, threaded=True, debug=False)

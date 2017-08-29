@@ -11,9 +11,9 @@ class plugins:
     #初始化
     def __init__(self,Main_dbc):
         for plug in Main_dbc.get_all('plugins', {}):
-            self.Main_plugins[plug['model']] = __import__('plugins.' + plug['model'] + '.plugin_' + plug['model'])
+            self.Main_plugins[plug['model']] = __import__('plugins.' + plug['model'] + '.' + plug['model'])
             self.Main_plugins[plug['model']] = eval(
-                "self.Main_plugins[plug['model']]." + plug['model'] + ".plugin_" + plug['model'])
+                "self.Main_plugins[plug['model']]." + plug['model'] + "." + plug['model'])
             self.Main_plugins[plug['model']].init(
                 dbc=class_MongoDB.MongoClient(class_config.Mongo_uri, class_logger.getLogger('Mdb - ' + plug['name']),
                                               plug['db']), logger=class_logger.getLogger(plug['name']))

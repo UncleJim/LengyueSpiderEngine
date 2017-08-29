@@ -48,7 +48,14 @@
                         <div class="am-form-group">
                             <label class="am-u-sm-3 am-form-label">CSS<span class="tpl-form-line-small-title">css</span></label>
                             <div class="am-u-sm-9">
-                                <input type="text" placeholder="请输入css" id="css" value="am-icon-user sidebar-nav-link-logo" value="{{ page['update'].css }}">
+                                <input type="text" placeholder="请输入css" id="css" value="{{ page['update'].css }}">
+                            </div>
+                        </div>
+
+                        <div class="am-form-group">
+                            <label class="am-u-sm-3 am-form-label">父组<span class="tpl-form-line-small-title">Father</span></label>
+                            <div class="am-u-sm-9">
+                                <input type="text" placeholder="请输入父组" id="father" value="{{ page['update'].father }}">
                             </div>
                         </div>
 
@@ -83,7 +90,7 @@
 <script>
     $('#reg').click(function() {
             $('#reg').active = false
-            $.getJSON('../mapi/menu/update?description=' + $('#description').val() + '&name=' + $('#name').val() + '&group=' + $('#group').val() + '&group=' + $('#group').val() + '&url=' + $('#url').val() + '&css=' + $('#css').val() + '&show=' + $('#show').val(),function(data){
+            $.getJSON('../mapi/menu/update?father=' + $('#father').val() + '&description=' + $('#description').val() + '&name=' + $('#name').val() + '&group=' + $('#group').val() + '&group=' + $('#group').val() + '&url=' + $('#url').val() + '&css=' + $('#css').val() + '&show=' + $('#show').val(),function(data){
                 alert(data['msg'])
                 if (data['state'] == 200){
                     window.location.href='?page=menu'

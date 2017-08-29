@@ -22,6 +22,7 @@
                                 <th>描述</th>
                                 <th>權限組</th>
                                 <th>可視</th>
+                                <th>父组</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
@@ -35,6 +36,7 @@
                                     <td>{{ menu.description }}</td>
                                     <td>{{ menu.group }}</td>
                                     <td>{{ menu.show }}</td>
+                                    <td>{{ menu.father }}</td>
                                     <td>
                                         <div class="tpl-table-black-operation">
                                             <a href="?page=updateMenu&url={{ menu.url }}">

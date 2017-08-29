@@ -1,0 +1,84 @@
+<div class="row-content am-cf">
+    <div class="row  am-cf">
+
+        <div class="am-u-sm-12 am-u-md-4 am-u-lg-4">
+            <div class="widget widget-primary am-cf">
+                <div class="widget-statistic-header">活跃代理</div>
+                <div class="widget-statistic-body">
+                    <div class="widget-statistic-value">{{ page['plugin'].alive }}</div>
+
+                    <span class="widget-statistic-icon am-icon-check"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="am-u-sm-12 am-u-md-4 am-u-lg-4">
+            <div class="widget widget-purple am-cf">
+                <div class="widget-statistic-header">总代理</div>
+                <div class="widget-statistic-body">
+                    <div class="widget-statistic-value">{{ page['plugin'].total }}</div>
+
+                    <span class="widget-statistic-icon am-icon-clone"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="am-u-sm-12 am-u-md-4 am-u-lg-4">
+            <div class="widget widget-primary am-cf">
+                <div class="widget-statistic-header">API请求次数</div>
+                <div class="widget-statistic-body">
+                    <div class="widget-statistic-value">0</div>
+
+                    <span class="widget-statistic-icon am-icon-exchange"></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+    <div class="row am-cf">
+
+
+        <div class="am-u-sm-12 am-u-md-12 am-u-lg-12 widget-margin-bottom-lg">
+
+            <div class="widget am-cf widget-body-lg">
+
+                <div class="widget-body  am-fr">
+                    <div class="am-scrollable-horizontal ">
+                        <div id="example-r_wrapper" class="dataTables_wrapper am-datatable am-form-inline dt-amazeui no-footer"><table width="100%" class="am-table am-table-compact am-text-nowrap tpl-table-black  dataTable no-footer" id="example-r" role="grid" style="width: 100%;">
+                            <thead>
+                                <tr role="row">
+                                    <th class="sorting_asc" tabindex="0" aria-controls="example-r" rowspan="1" colspan="1" aria-sort="ascending" aria-label="ID: 以升序排列此列">#</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example-r" rowspan="1" colspan="1" aria-label="IP: 以升序排列此列">IP</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example-r" rowspan="1" colspan="1" aria-label="端口: 以升序排列此列">端口</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example-r" rowspan="1" colspan="1" aria-label="响应速度: 以升序排列此列">响应速度</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example-r" rowspan="1" colspan="1" aria-label="最后检测: 以升序排列此列">最后检测</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for proxy in page['plugin'].proxies %}
+                                <tr class="gradeX">
+                                    <td>{{ proxy.id }}</td>
+                                    <td>{{ proxy.ip }}</td>
+                                    <td>{{ proxy.port }}</td>
+                                    <td>{{ proxy.delay }}</td>
+                                    <td>{{ proxy.last_check }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="../static/js/amazeui.min.js"></script>
+<script src="../static/js/amazeui.datatables.min.js"></script>
+<script src="../static/js/dataTables.responsive.min.js"></script>
+<script src="../static/js/app.js"></script>
